@@ -1,0 +1,68 @@
+# Model5 Parameter file:
+#
+# TOV star initial data, 1+log slicing, no shift.
+
+dr0 = 0.05		      # Grid spacing
+Nrtotal = 520		  # Number of grid points
+Nt = 100000           # Number of time steps
+Nl = 1                # Number of refinement levels
+
+dtfac = 0.5		          # Courant parameter
+slicing = 1+log 	      # Type of slicing condition
+gauge_f = 2.0	          # Coefficient for harmonic slicing
+integrator = rk4	  # Type of integration method (icn,rk4)
+order = four  		  # Order for spatial finite differencing (two,four)
+
+boundtype = constraint    # Constraint preserving boundary condition
+mattertype = fluid        # Perfect fluid
+fluid_method = hlle       # Numerical method for fluid 
+
+## Atmos
+fluid_atmos = 1.d-10
+fluid_gamma = 1.666666666 # Adiabatic index (5/3 for a monoatomic non-relativistic gas)
+fluid_kappa = 1.0         # Politropic constant
+
+
+
+fluid_limiter = sweby    # Type of limiter                                                ########  range = minmod,vanleer,superbee,mc,koren,ospre,sweby             
+fluid_usesoundspeed = true                                                                 ########
+
+# Funciona con: minmod,vanleer,ospre,sweby
+
+## TOV star 2 parameters:
+idata = TOVstar2		  # Type of initial data
+
+fluid_EOS  = TOV2_EoS         # Options: none,TOV2_EoS, TOV2_ev                             ######## TOV2_EoS
+filterTOV2 = false                                                                          ######## false
+vsSecondOrderTOV2 = true                                                                    ######## true
+
+TOV_rho_c = 0.0005009278236968437
+TOV_e_c   = 0.7453931139262846
+TOV_P0    = 4.328e-05
+C2_tov    = 3.274549162877732e-06
+C4_tov    = 1.4174741629268078e-09
+TOV_Rt    = 12
+
+# If fluid_EOS  = TOV2_EoS then we need:
+# x =  a3_eos*rho_input**2  +  a2_eos*rho_input  +  a1_eos
+a3_eos = 1265.0323718635184
+a2_eos = -0.3128707832861834
+a1_eos = 2.8866314498437012e-5
+rho_minim = 1.685817941207997e-7
+rho_maxim = 0.0002870000568273555
+
+fluid_q1 = 0.0		  # Coefficient for linear artificial viscosity term
+fluid_q2 = 0.0		  # Coefficient for quadratic artificial viscosity term
+
+geodiss = 0.05            # Dissipation coefficient for geometry
+
+ahfind = .false.         # Look for apparent horizon
+ahfind_every = 10       # How often to look for horizons?
+
+directory = TOVstar2_Model5_SinPolvo0.05       # Name of output directory
+Ninfo = 200		  # How often do we want to output information to screen?
+Noutput0D = 10		  # How often do we want 0D output?
+Noutput1D = 200           # How often do we want 1D output?
+
+outvars0D = alpha,phi,psi,A,B,trK,KTA,Deltar,lambda,ham,mom,fluid_rho,fluid_e,fluid_p,fluid_v,fluid_h,fluid_vs,fluid_W,fluid_cD,fluid_cE,fluid_cS,rho,trS,mass_sch,mass_int,compactness #,Omega_TOV2
+outvars1D = alpha,phi,psi,A,B,trK,KTA,Deltar,lambda,ham,mom,fluid_rho,fluid_e,fluid_p,fluid_v,fluid_h,fluid_vs,fluid_W,fluid_cD,fluid_cE,fluid_cS,rho,trS,mass_sch,mass_int,compactness #,Omega_TOV2
